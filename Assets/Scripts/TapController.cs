@@ -23,6 +23,24 @@ public class TapController : MonoBehaviour{
         forwardRotation = Quaternion.Euler(0, 0, 35);
     }
 
+    void OnEnable() {
+        GameManager.OnGameStarted += OnGameStarted;
+        GameManager.OnGameOverConfirmed += OnGameOverConfirmed;
+    }
+
+    void OnDisable() {
+        GameManager.OnGameStarted -= OnGameStarted;
+        GameManager.OnGameOverConfirmed -= OnGameOverConfirmed;  
+    }
+
+    void OnGameStarted() {
+
+    }
+
+    void OnGameOverConfirmed() {
+        
+    }
+
     void Update() {
         if (Input.GetMouseButtonDown(0)) {
             transform.rotation = forwardRotation;
@@ -36,12 +54,14 @@ public class TapController : MonoBehaviour{
     void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.tag == "ScoreZone") {
             //register a score event
+            OnPlayerScored(); //event sent to GameManager
             //play a sound
         }
 
         if (col.gameObject.tag == "DeadZone") {
             rigidbody.simulated = false;
             //regiater a dead event
+            OnPlayerDied(); //event sent to GameManager
             //play a sound
         }
     }
