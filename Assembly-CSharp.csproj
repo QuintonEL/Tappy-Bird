@@ -55,6 +55,8 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\CountdownText.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Scripts\HighscoreText.cs" />
+     <Compile Include="Assets\Scripts\Parallaxer.cs" />
      <Compile Include="Assets\Scripts\TapController.cs" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>/home/quinton/Projects/Unity/TappyBird/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
