@@ -33,6 +33,21 @@ public class GameManager : MonoBehaviour {
         Instance = this;
     }
 
+    void OnEnable() {
+        CountdownText.OnCountdownFinished += OnCountdownFinished;
+    }
+
+    void OnDisable() {
+        CountdownText.OnCountdownFinished -= OnCountdownFinished;
+    }
+
+    void OnCountdownFinished() {
+        SetPageState(PageState.None);
+        OnGameStarted();
+        score = 0;
+        gameOver = false;
+    }
+
     void SetPageState(PageState state) {
         switch (state) {
             case PageState.None:
