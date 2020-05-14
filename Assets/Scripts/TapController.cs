@@ -17,10 +17,13 @@ public class TapController : MonoBehaviour{
     Quaternion downRotation;
     Quaternion forwardRotation;
 
+    GameManager game;
+
     void Start() {
         rigidbody = GetComponent<Rigidbody2D>();
         downRotation = Quaternion.Euler(0, 0, -90);
         forwardRotation = Quaternion.Euler(0, 0, 35);
+        game = GameManager.Instance;
     }
 
     void OnEnable() {
@@ -34,14 +37,18 @@ public class TapController : MonoBehaviour{
     }
 
     void OnGameStarted() {
-
+        rigidbody.velocity = Vector3.zero;
+        rigidbody.simulated = true;
     }
 
     void OnGameOverConfirmed() {
-        
+        transform.localPosition = startPos;
+        transform.rotation = Quaternion.identity;
     }
 
     void Update() {
+        if (game.GameOver) return;
+
         if (Input.GetMouseButtonDown(0)) {
             transform.rotation = forwardRotation;
             rigidbody.velocity = Vector3.zero;
